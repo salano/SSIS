@@ -62,6 +62,7 @@ Add 'OLE DB source' to the dataflow and configure the source connection and tabl
 
 Add a 'Slowly Changing Dimension' task to the control flow and configure as illustrated below
 ![Alt text](BusinessKey_SCD.png)
+![Alt text](SCD_type.png)
 ![Alt text](Historical_attributes.png)
 ![Alt text](inferred_member_support_config.png)
 Upon completion of the 'Slowly Changing Dimension' task, the remaining steps in the dataflow task will be auto generated as follow:
