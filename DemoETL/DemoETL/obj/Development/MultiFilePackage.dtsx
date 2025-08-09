@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{95B87AB9-DFFF-4133-84FD-68034B7AE080}">
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{3C4E90D0-B92F-417F-8918-9774128A379E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -448,34 +448,32 @@
                         isUsed="True">
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[CustomerKey]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
+                          dataType="i2"
                           name="CustomerKey" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Gender]"
                           dataType="wstr"
-                          length="50"
+                          length="6"
                           name="Gender" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Name]"
                           dataType="wstr"
-                          length="50"
+                          length="20"
                           name="Name" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[City]"
                           dataType="wstr"
-                          length="50"
+                          length="21"
                           name="City" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[State Code]"
                           dataType="wstr"
-                          length="50"
+                          length="3"
                           name="State Code" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[State]"
                           dataType="wstr"
-                          length="50"
+                          length="28"
                           name="State" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Zip Code]"
@@ -485,18 +483,16 @@
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Country]"
                           dataType="wstr"
-                          length="50"
+                          length="9"
                           name="Country" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Continent]"
                           dataType="wstr"
-                          length="50"
+                          length="9"
                           name="Continent" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Birthday ]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
+                          dataType="date"
                           name="Birthday " />
                       </externalMetadataColumns>
                     </output>
@@ -824,7 +820,7 @@
         <NodeLayout
           Size="182.666666666667,42.6666666666667"
           Id="Package\Execute Python script"
-          TopLeft="144.374993545935,256.578944551235" />
+          TopLeft="158.749992903322,256.578944551235" />
         <NodeLayout
           Size="180,42.6666666666667"
           Id="Package\Loop through Customers files\Load Customers TBL"
@@ -832,40 +828,40 @@
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="240.666666666667,64.6666666666667"
-          Size="240.666666666667,107.333333333334"
+          PanelSize="240.666666666667,128"
+          Size="240.666666666667,170.666666666667"
           Id="Package\Loop through Customers files"
-          TopLeft="128.124994272366,123.964911153827" />
+          TopLeft="142.499993629753,123.964911153827" />
         <NodeLayout
           Size="198.666666666667,42.6666666666667"
           Id="Package\Truncate Customers TBL"
-          TopLeft="133.124994048849,37.6315785341811" />
+          TopLeft="147.499993406236,37.6315785341811" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="232.458327382182,80.2982452008478">
+          TopLeft="246.833326739569,80.2982452008478">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="16.0000002235174,43.6666659529795"
+              EndConnector="16.000000223517,43.6666659529792"
               Start="0,0"
-              End="16.0000002235174,36.1666659529795">
+              End="16.000000223517,36.1666659529792">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,17.8333329764897" />
+                    End="0,17.8333329764896" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,17.8333329764897"
-                    Point2="0,21.8333329764897"
-                    Point3="4,21.8333329764897" />
+                    Point1="0,17.8333329764896"
+                    Point2="0,21.8333329764896"
+                    Point3="4,21.8333329764896" />
                   <mssgle:LineSegment
-                    End="12.0000002235174,21.8333329764897" />
+                    End="12.000000223517,21.8333329764896" />
                   <mssgle:CubicBezierSegment
-                    Point1="12.0000002235174,21.8333329764897"
-                    Point2="16.0000002235174,21.8333329764897"
-                    Point3="16.0000002235174,25.8333329764897" />
+                    Point1="12.000000223517,21.8333329764896"
+                    Point2="16.000000223517,21.8333329764896"
+                    Point3="16.000000223517,25.8333329764896" />
                   <mssgle:LineSegment
-                    End="16.0000002235174,36.1666659529795" />
+                    End="16.000000223517,36.1666659529792" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -876,30 +872,30 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="248.4583276057,231.298244487161">
+          TopLeft="262.833326963086,294.631577820494">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-12.7500007264316,25.2807000640743"
+              EndConnector="-12.750000726431,-38.0526332692586"
               Start="0,0"
-              End="-12.7500007264316,17.7807000640743">
+              End="-12.750000726431,-30.5526332692586">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.64035003203716" />
+                    End="0,-15.0263166346293" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,8.64035003203716"
-                    Point2="0,12.6403500320372"
-                    Point3="-4,12.6403500320372" />
+                    Point1="0,-15.0263166346293"
+                    Point2="0,-19.0263166346293"
+                    Point3="-4,-19.0263166346293" />
                   <mssgle:LineSegment
-                    End="-8.75000072643155,12.6403500320372" />
+                    End="-8.75000072643098,-19.0263166346293" />
                   <mssgle:CubicBezierSegment
-                    Point1="-8.75000072643155,12.6403500320372"
-                    Point2="-12.7500007264316,12.6403500320372"
-                    Point3="-12.7500007264316,16.6403500320372" />
+                    Point1="-8.75000072643098,-19.0263166346293"
+                    Point2="-12.750000726431,-19.0263166346293"
+                    Point3="-12.750000726431,-23.0263166346293" />
                   <mssgle:LineSegment
-                    End="-12.7500007264316,17.7807000640743" />
+                    End="-12.750000726431,-30.5526332692586" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -915,7 +911,7 @@
     design-time-name="Package\Loop through Customers files\Load Customers TBL">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="153.333333333334,42.6666666666667"
           Id="Package\Loop through Customers files\Load Customers TBL\Customers TBL"
@@ -955,9 +951,7 @@
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

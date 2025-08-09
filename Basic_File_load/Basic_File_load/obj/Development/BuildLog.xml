@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
-    <Name>DemoETL</Name>
-    <LastWriteTime>2025-08-08T16:05:01.9235997Z</LastWriteTime>
+    <Name>Basic_File_load</Name>
+    <LastWriteTime>2025-08-08T18:41:20.6034971Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
-      <Name>DemoPackage.dtsx</Name>
-      <LastWriteTime>2025-08-04T23:08:21.039005Z</LastWriteTime>
+      <Name>file_load.dtsx</Name>
+      <LastWriteTime>2025-08-08T16:02:47.5566563Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>MultiFilePackage.dtsx</Name>
-      <LastWriteTime>2025-08-08T16:05:01.9083028Z</LastWriteTime>
+      <Name>new_files.dtsx</Name>
+      <LastWriteTime>2025-08-09T13:48:05.2299551Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="34"
-  DTS:VersionGUID="{C38A5AE0-67D6-44D7-82A8-1F4718D642F7}">
+  DTS:VersionBuild="35"
+  DTS:VersionGUID="{3C4E90D0-B92F-417F-8918-9774128A379E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -448,34 +448,32 @@
                         isUsed="True">
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[CustomerKey]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
+                          dataType="i2"
                           name="CustomerKey" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Gender]"
                           dataType="wstr"
-                          length="50"
+                          length="6"
                           name="Gender" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Name]"
                           dataType="wstr"
-                          length="50"
+                          length="20"
                           name="Name" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[City]"
                           dataType="wstr"
-                          length="50"
+                          length="21"
                           name="City" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[State Code]"
                           dataType="wstr"
-                          length="50"
+                          length="3"
                           name="State Code" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[State]"
                           dataType="wstr"
-                          length="50"
+                          length="28"
                           name="State" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Zip Code]"
@@ -485,18 +483,16 @@
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Country]"
                           dataType="wstr"
-                          length="50"
+                          length="9"
                           name="Country" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Continent]"
                           dataType="wstr"
-                          length="50"
+                          length="9"
                           name="Continent" />
                         <externalMetadataColumn
                           refId="Package\Loop through Customers files\Load Customers TBL\Customers CSV.Outputs[Flat File Source Output].ExternalColumns[Birthday ]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
+                          dataType="date"
                           name="Birthday " />
                       </externalMetadataColumns>
                     </output>
@@ -842,7 +838,7 @@
           TopLeft="147.499993406236,37.6315785341811" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="246.83332673957,80.2982452008478">
+          TopLeft="246.833326739569,80.2982452008478">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -876,7 +872,7 @@
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="262.833326963087,294.631577820494">
+          TopLeft="262.833326963086,294.631577820494">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"

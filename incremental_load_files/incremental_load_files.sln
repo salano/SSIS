@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{C9674DCB-5085-4A16-B785-4C70DD1589BD}") = "incremental_load_files", "incremental_load_files\incremental_load_files.dtproj", "{95D0230F-B003-F229-7D57-A2F21C8E5F1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{95D0230F-B003-F229-7D57-A2F21C8E5F1B}.Development|Default.ActiveCfg = Development
+		{95D0230F-B003-F229-7D57-A2F21C8E5F1B}.Development|Default.Build.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E9200BE-C3D0-4487-A3E2-418ADF468CEA}
+	EndGlobalSection
+EndGlobal
