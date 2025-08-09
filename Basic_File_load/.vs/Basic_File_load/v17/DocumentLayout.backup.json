@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\SSIS_PROJECTS\\Basic_File_load\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C29BEC64-0971-9F3F-F200-97104526E9A6}|Basic_File_load\\Basic_File_load.dtproj|D:\\SSIS_PROJECTS\\Basic_File_load\\Basic_File_load\\new_files.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
-      "RelativeMoniker": "D:0:0:{C29BEC64-0971-9F3F-F200-97104526E9A6}|Basic_File_load\\Basic_File_load.dtproj|solutionrelative:Basic_File_load\\new_files.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C29BEC64-0971-9F3F-F200-97104526E9A6}|Basic_File_load\\Basic_File_load.dtproj|D:\\SSIS_PROJECTS\\Basic_File_load\\Basic_File_load\\file_load.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
       "RelativeMoniker": "D:0:0:{C29BEC64-0971-9F3F-F200-97104526E9A6}|Basic_File_load\\Basic_File_load.dtproj|solutionrelative:Basic_File_load\\file_load.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C29BEC64-0971-9F3F-F200-97104526E9A6}|Basic_File_load\\Basic_File_load.dtproj|D:\\SSIS_PROJECTS\\Basic_File_load\\Basic_File_load\\new_files.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{C29BEC64-0971-9F3F-F200-97104526E9A6}|Basic_File_load\\Basic_File_load.dtproj|solutionrelative:Basic_File_load\\new_files.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,7 +26,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "file_load.dtsx [Design]",
               "DocumentMoniker": "D:\\SSIS_PROJECTS\\Basic_File_load\\Basic_File_load\\file_load.dtsx",
               "RelativeDocumentMoniker": "Basic_File_load\\file_load.dtsx",
@@ -38,7 +38,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "new_files.dtsx [Design]",
               "DocumentMoniker": "D:\\SSIS_PROJECTS\\Basic_File_load\\Basic_File_load\\new_files.dtsx",
               "RelativeDocumentMoniker": "Basic_File_load\\new_files.dtsx",

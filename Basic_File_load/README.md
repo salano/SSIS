@@ -28,3 +28,11 @@ RecordsInsert Epression
 Script Task config
 ![Alt text](newfile_archiveScript_config.png)
 ![Alt text](script_code.png)
+
+Send email
+![Alt text](emai_variables.png)
+![Alt text](email_control_flow.png)
+Constraint expression
+![Alt text](email_constraint_expression.png)
+Email Code
+![Alt text](email_script_code.png)
