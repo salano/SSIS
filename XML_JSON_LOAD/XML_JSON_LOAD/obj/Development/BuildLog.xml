@@ -1,24 +1,19 @@
 <?xml version="1.0"?>
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
-    <Name>Basic_File_load</Name>
-    <LastWriteTime>2025-08-09T17:00:54.9937363Z</LastWriteTime>
+    <Name>XML_JSON_LOAD</Name>
+    <LastWriteTime>2025-08-11T13:35:10.6278087Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
-      <Name>file_load.dtsx</Name>
-      <LastWriteTime>2025-08-08T16:02:47.5566563Z</LastWriteTime>
+      <Name>XML_Load.dtsx</Name>
+      <LastWriteTime>2025-08-11T12:00:37.2743506Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
-      <Name>new_files.dtsx</Name>
-      <LastWriteTime>2025-08-09T14:01:06.4204578Z</LastWriteTime>
-      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
-    </ProjectBuildItemInfo>
-    <ProjectBuildItemInfo>
-      <Name>Email_No_File.dtsx</Name>
-      <LastWriteTime>2025-08-09T17:00:54.9501201Z</LastWriteTime>
+      <Name>JSON_load.dtsx</Name>
+      <LastWriteTime>2025-08-11T13:46:31.4835556Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

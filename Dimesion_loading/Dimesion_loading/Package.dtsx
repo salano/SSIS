@@ -1,0 +1,2626 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/13/2025 4:36:02 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MSI"
+  DTS:CreatorName="MSI\salano"
+  DTS:DTSID="{CF4F80E6-A3A6-476D-9786-EADB92202883}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="14"
+  DTS:VersionGUID="{C77D03A4-2499-47B9-B9BB-B2AA369BD94B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MSI\SALANODEMO.FameSell]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{78AEA4ED-4824-4953-9AF0-A23730672750}"
+      DTS:ObjectName="MSI\SALANODEMO.FameSell">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MSI\SALANODEMO;Initial Catalog=FameSell;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{78AEA4ED-4824-4953-9AF0-A23730672750}MSI\SALANODEMO.FameSell;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F89F288B-6801-4D30-9F21-AB8E87C3CBFF}"
+      DTS:ObjectName="MSI\SALANODEMO.FameSellDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MSI\SALANODEMO;Initial Catalog=FameSellDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{F89F288B-6801-4D30-9F21-AB8E87C3CBFF}MSI\SALANODEMO.FameSellDW;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Staging Tables"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9973C1BB-3238-42D7-8F71-02DF9CE4EE19}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Staging Tables"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F89F288B-6801-4D30-9F21-AB8E87C3CBFF}"
+          SQLTask:SqlStatementSource="IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Employee_Insert]') AND type in (N'U'))&#xA;DROP TABLE [dbo].[Employee_Insert]&#xA;GO&#xA;&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[Employee_Insert](&#xA;&#x9;[EmployeeID] [int] NOT NULL,&#xA;&#x9;[FirstName] [nvarchar](50) NOT NULL,&#xA;&#x9;[LastName] [nvarchar](50) NOT NULL,&#xA;&#x9;[IsPermittedToLogon] [bit] NOT NULL,&#xA;&#x9;[LogonName] [nvarchar](50) NULL,&#xA;&#x9;[IsSalesperson] [bit] NOT NULL,&#xA;&#x9;[PhoneNumber] [nvarchar](20) NULL,&#xA;&#x9;[FaxNumber] [nvarchar](20) NULL,&#xA;&#x9;[Email] [nvarchar](256) NULL,&#xA;&#x9;[ValidFrom] [datetime2](7) NOT NULL,&#xA; CONSTRAINT [PK_Empolyee_Insert] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[EmployeeID] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO&#xA;&#xA;&#xA;&#xA;IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Employee_Update]') AND type in (N'U'))&#xA;DROP TABLE [dbo].[Employee_Update]&#xA;GO&#xA;&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;CREATE TABLE [dbo].[Employee_Update](&#xA;&#x9;[EmployeeID] [int] NOT NULL,&#xA;&#x9;[FirstName] [nvarchar](50) NOT NULL,&#xA;&#x9;[LastName] [nvarchar](50) NOT NULL,&#xA;&#x9;[IsPermittedToLogon] [bit] NOT NULL,&#xA;&#x9;[LogonName] [nvarchar](50) NULL,&#xA;&#x9;[IsSalesperson] [bit] NOT NULL,&#xA;&#x9;[PhoneNumber] [nvarchar](20) NULL,&#xA;&#x9;[FaxNumber] [nvarchar](20) NULL,&#xA;&#x9;[Email] [nvarchar](256) NULL,&#xA;&#x9;[ValidFrom] [datetime2](7) NOT NULL,&#xA;&#x9;[ValidTo] [datetime2](7) NULL,&#xA; CONSTRAINT [PK_Empolyee_update] PRIMARY KEY CLUSTERED &#xA;(&#xA;&#x9;[EmployeeID] ASC&#xA;)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]&#xA;) ON [PRIMARY]&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Merge SCD Type 2 records into Dim Emp"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{455556F7-5B6D-45A6-AD08-AF1C87C3318B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Merge SCD Type 2 records into Dim Emp"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Dimension].[Employee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsPermittedToLogon]"
+                      cachedDataType="bool"
+                      cachedName="IsPermittedToLogon"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]" />
+                    <inputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LogonName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LogonName"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]" />
+                    <inputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[IsSalesperson]"
+                      cachedDataType="bool"
+                      cachedName="IsSalesperson"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]" />
+                    <inputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FaxNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="FaxNumber"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]" />
+                    <inputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="256"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ValidFrom]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="ValidFrom"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeSK]"
+                      dataType="i4"
+                      name="EmployeeSK" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      dataType="bool"
+                      name="IsPermittedToLogon" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LogonName" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      dataType="bool"
+                      name="IsSalesperson" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="FaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="256"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      name="ValidFrom"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ValidTo]"
+                      dataType="dbTimeStamp2"
+                      name="ValidTo"
+                      scale="7" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[Employee_Insert]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmployeeID]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeID]"
+                      name="EmployeeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="50"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="50"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsPermittedToLogon]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]"
+                      name="IsPermittedToLogon"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LogonName]"
+                      length="50"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]"
+                      name="LogonName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsSalesperson]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]"
+                      name="IsSalesperson"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      length="20"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      name="PhoneNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FaxNumber]"
+                      length="20"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]"
+                      name="FaxNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      length="256"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      name="Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsPermittedToLogon]"
+                      dataType="bool"
+                      name="IsPermittedToLogon" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LogonName" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsSalesperson]"
+                      dataType="bool"
+                      name="IsSalesperson" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="FaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="256"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      name="ValidFrom"
+                      scale="7" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmployeeID]"
+                      dataType="i4"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmployeeID]"
+                      name="EmployeeID" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsPermittedToLogon]"
+                      dataType="bool"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsPermittedToLogon]"
+                      name="IsPermittedToLogon" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LogonName]"
+                      name="LogonName" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsSalesperson]"
+                      dataType="bool"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsSalesperson]"
+                      name="IsSalesperson" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      name="PhoneNumber" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FaxNumber]"
+                      name="FaxNumber" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      dataType="wstr"
+                      length="256"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Merge SCD Type 2 records into Dim Emp.Paths[OLE DB Source Output]"
+              endId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Migrate data to Dim Table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{080B8F75-0FB3-449D-91DE-4A8D67AB261C}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Migrate data to Dim Table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Migrate data to Dim Table\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input].Columns[LogonName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LogonName"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input].Columns[FaxNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="FaxNumber"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="256"
+                      cachedName="Email"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input].Columns[Dest_EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="Dest_EmployeeID"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_EmployeeID]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input].Columns[Dest_LogonName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Dest_LogonName"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_LogonName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input].Columns[Dest_PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Dest_PhoneNumber"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input].Columns[Dest_FaxNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Dest_FaxNumber"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_FaxNumber]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input].Columns[Dest_Email]"
+                      cachedDataType="wstr"
+                      cachedLength="256"
+                      cachedName="Dest_Email"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_Email]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Migrate data to Dim Table\Conditional Split.Outputs[New Records]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="New Records"
+                  synchronousInputId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_EmployeeID]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(Dest_EmployeeID)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Migrate data to Dim Table\Conditional Split.Outputs[SCD Type 1]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="SCD Type 1"
+                  synchronousInputId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]} != #{Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_LogonName]} || #{Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]} != #{Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_Email]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">LogonName != Dest_LogonName || Email != Dest_Email</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Migrate data to Dim Table\Conditional Split.Outputs[SCD Type 2]"
+                  description="Output 3 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="SCD Type 2"
+                  synchronousInputId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]} != #{Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_PhoneNumber]} || #{Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]} != #{Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_FaxNumber]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">PhoneNumber != Dest_PhoneNumber || FaxNumber != Dest_FaxNumber</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">2</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Migrate data to Dim Table\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Migrate data to Dim Table\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Migrate data to Dim Table\Insert Records"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert Records"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Employee_Insert]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Migrate data to Dim Table\Insert Records.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].Columns[IsPermittedToLogon]"
+                      cachedDataType="bool"
+                      cachedName="IsPermittedToLogon"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].Columns[LogonName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LogonName"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].Columns[IsSalesperson]"
+                      cachedDataType="bool"
+                      cachedName="IsSalesperson"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].Columns[FaxNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="FaxNumber"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="256"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].Columns[ValidFrom]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="ValidFrom"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      dataType="bool"
+                      name="IsPermittedToLogon" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LogonName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      dataType="bool"
+                      name="IsSalesperson" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="FaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="256"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      name="ValidFrom"
+                      scale="7" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Migrate data to Dim Table\Insert Records.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\Insert Records.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Insert Records.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\Insert Records.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Migrate data to Dim Table\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+      [EmployeeID]
+      ,[FirstName]
+      ,[LastName]
+      ,[IsPermittedToLogon]
+      ,[LogonName]
+      ,[IsSalesperson]
+      ,[PhoneNumber]
+      ,[FaxNumber]
+      ,[Email]
+      ,[ValidFrom]
+  FROM [Dimension].[Employee]
+  where ValidTo = '9999-12-31 00:00:00.0000000'</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT 
+      [EmployeeID]
+      ,[FirstName]
+      ,[LastName]
+      ,[IsPermittedToLogon]
+      ,[LogonName]
+      ,[IsSalesperson]
+      ,[PhoneNumber]
+      ,[FaxNumber]
+      ,[Email]
+      ,[ValidFrom]
+  FROM [Dimension].[Employee]
+  where ValidTo = '9999-12-31 00:00:00.0000000') [refTable]
+where [refTable].[EmployeeID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="EmployeeID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FirstName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsPermittedToLogon" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LogonName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="IsSalesperson" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PhoneNumber" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FaxNumber" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Email" dataType="DT_WSTR" length="256" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ValidFrom" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Migrate data to Dim Table\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Migrate data to Dim Table\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Inputs[Lookup Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">EmployeeID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Migrate data to Dim Table\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_EmployeeID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_EmployeeID]"
+                      name="Dest_EmployeeID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">EmployeeID</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_FirstName]"
+                      name="Dest_FirstName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">FirstName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_LastName]"
+                      name="Dest_LastName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">LastName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_IsPermittedToLogon]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_IsPermittedToLogon]"
+                      name="Dest_IsPermittedToLogon"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">IsPermittedToLogon</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_LogonName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_LogonName]"
+                      name="Dest_LogonName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">LogonName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_IsSalesperson]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_IsSalesperson]"
+                      name="Dest_IsSalesperson"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">IsSalesperson</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_PhoneNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_PhoneNumber]"
+                      name="Dest_PhoneNumber"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PhoneNumber</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_FaxNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_FaxNumber]"
+                      name="Dest_FaxNumber"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">FaxNumber</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_Email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="256"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_Email]"
+                      name="Dest_Email"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Email</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_ValidFrom]"
+                      name="Dest_ValidFrom"
+                      scale="7"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ValidFrom</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Migrate data to Dim Table\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Migrate data to Dim Table\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Migrate data to Dim Table\New Records"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="New Records"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[Dimension].[Employee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Migrate data to Dim Table\New Records.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[IsPermittedToLogon]"
+                      cachedDataType="bool"
+                      cachedName="IsPermittedToLogon"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[LogonName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LogonName"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[IsSalesperson]"
+                      cachedDataType="bool"
+                      cachedName="IsSalesperson"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[FaxNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="FaxNumber"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="256"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[ValidFrom]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="ValidFrom"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].Columns[ValidTo]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="ValidTo"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[ValidTo]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidTo]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeSK]"
+                      dataType="i4"
+                      name="EmployeeSK" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      dataType="bool"
+                      name="IsPermittedToLogon" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LogonName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      dataType="bool"
+                      name="IsSalesperson" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="FaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="256"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      name="ValidFrom"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input].ExternalColumns[ValidTo]"
+                      dataType="dbTimeStamp2"
+                      name="ValidTo"
+                      scale="7" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Migrate data to Dim Table\New Records.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\New Records.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\New Records.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\New Records.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Migrate data to Dim Table\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [FameSell].[dbo].[Employee]</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Migrate data to Dim Table\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MSI\SALANODEMO.FameSell]"
+                  connectionManagerRefId="Package.ConnectionManagers[MSI\SALANODEMO.FameSell]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmployeeID]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeID]"
+                      name="EmployeeID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      length="50"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]"
+                      name="FirstName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      length="50"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]"
+                      name="LastName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsPermittedToLogon]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]"
+                      name="IsPermittedToLogon"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LogonName]"
+                      length="50"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]"
+                      name="LogonName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsSalesperson]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]"
+                      name="IsSalesperson"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      length="20"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]"
+                      name="PhoneNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FaxNumber]"
+                      length="20"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]"
+                      name="FaxNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      length="256"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]"
+                      name="Email"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidTo]"
+                      dataType="dbTimeStamp2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidTo]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidTo]"
+                      name="ValidTo"
+                      scale="7"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsPermittedToLogon]"
+                      dataType="bool"
+                      name="IsPermittedToLogon" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LogonName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[IsSalesperson]"
+                      dataType="bool"
+                      name="IsSalesperson" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="FaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="256"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      name="ValidFrom"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ValidTo]"
+                      dataType="dbTimeStamp2"
+                      name="ValidTo"
+                      scale="7" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmployeeID]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[EmployeeID]"
+                      name="EmployeeID" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FirstName]"
+                      name="FirstName" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LastName]"
+                      name="LastName" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsPermittedToLogon]"
+                      dataType="bool"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsPermittedToLogon]"
+                      name="IsPermittedToLogon" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[LogonName]"
+                      name="LogonName" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsSalesperson]"
+                      dataType="bool"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[IsSalesperson]"
+                      name="IsSalesperson" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PhoneNumber]"
+                      name="PhoneNumber" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FaxNumber]"
+                      name="FaxNumber" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      dataType="wstr"
+                      length="256"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Email]"
+                      name="Email" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidFrom]"
+                      name="ValidFrom"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidTo]"
+                      dataType="dbTimeStamp2"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ValidTo]"
+                      name="ValidTo"
+                      scale="7" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Migrate data to Dim Table\Update Records"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Update Records"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[Employee_Update]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Migrate data to Dim Table\Update Records.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[EmployeeID]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeID"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[EmployeeID]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[FirstName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="FirstName"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FirstName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[LastName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LastName"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LastName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[IsPermittedToLogon]"
+                      cachedDataType="bool"
+                      cachedName="IsPermittedToLogon"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsPermittedToLogon]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[LogonName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LogonName"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[LogonName]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[IsSalesperson]"
+                      cachedDataType="bool"
+                      cachedName="IsSalesperson"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[IsSalesperson]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[PhoneNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[PhoneNumber]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[FaxNumber]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="FaxNumber"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[FaxNumber]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[Email]"
+                      cachedDataType="wstr"
+                      cachedLength="256"
+                      cachedName="Email"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[Email]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[ValidFrom]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="ValidFrom"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidFrom]" />
+                    <inputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].Columns[ValidTo]"
+                      cachedDataType="dbTimeStamp2"
+                      cachedName="ValidTo"
+                      cachedScale="7"
+                      externalMetadataColumnId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[ValidTo]"
+                      lineageId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output].Columns[ValidTo]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeID]"
+                      dataType="i4"
+                      name="EmployeeID" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[FirstName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FirstName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[LastName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LastName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[IsPermittedToLogon]"
+                      dataType="bool"
+                      name="IsPermittedToLogon" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[LogonName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LogonName" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[IsSalesperson]"
+                      dataType="bool"
+                      name="IsSalesperson" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[PhoneNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[FaxNumber]"
+                      dataType="wstr"
+                      length="20"
+                      name="FaxNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[Email]"
+                      dataType="wstr"
+                      length="256"
+                      name="Email" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[ValidFrom]"
+                      dataType="dbTimeStamp2"
+                      name="ValidFrom"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input].ExternalColumns[ValidTo]"
+                      dataType="dbTimeStamp2"
+                      name="ValidTo"
+                      scale="7" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Migrate data to Dim Table\Update Records.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\Update Records.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Migrate data to Dim Table\Update Records.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Migrate data to Dim Table\Update Records.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Migrate data to Dim Table.Paths[Lookup Match Output]"
+              endId="Package\Migrate data to Dim Table\Conditional Split.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Migrate data to Dim Table\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Migrate data to Dim Table.Paths[New Records]"
+              endId="Package\Migrate data to Dim Table\New Records.Inputs[OLE DB Destination Input]"
+              name="New Records"
+              startId="Package\Migrate data to Dim Table\Conditional Split.Outputs[New Records]" />
+            <path
+              refId="Package\Migrate data to Dim Table.Paths[OLE DB Source Output]"
+              endId="Package\Migrate data to Dim Table\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Migrate data to Dim Table\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Migrate data to Dim Table.Paths[SCD Type 1]"
+              endId="Package\Migrate data to Dim Table\Update Records.Inputs[OLE DB Destination Input]"
+              name="SCD Type 1"
+              startId="Package\Migrate data to Dim Table\Conditional Split.Outputs[SCD Type 1]" />
+            <path
+              refId="Package\Migrate data to Dim Table.Paths[SCD Type 2]"
+              endId="Package\Migrate data to Dim Table\Insert Records.Inputs[OLE DB Destination Input]"
+              name="SCD Type 2"
+              startId="Package\Migrate data to Dim Table\Conditional Split.Outputs[SCD Type 2]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Type1 Records"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{C857F043-A9C7-4CF0-8EB5-7AD81FDB56F9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Type1 Records"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F89F288B-6801-4D30-9F21-AB8E87C3CBFF}"
+          SQLTask:SqlStatementSource="&#xA;--SCD Type 1&#xA;update a&#xA;set a.LogonName = b.LogonName,&#xA;a.Email = b.Email&#xA;from [Dimension].[Employee] a inner join [dbo].[Employee_Update] b&#xA;on a.[EmployeeID] = b.[EmployeeID]&#xA;go&#xA;--SCD Type 2&#xA;update a&#xA;set a.ValidTo = getdate()&#xA;from [Dimension].[Employee] a inner join Employee_Insert b&#xA;on a.[EmployeeID] = b.[EmployeeID]&#xA;where a.ValidTo is null" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{F9CD36B9-3406-41FC-BE11-21008003D059}"
+      DTS:From="Package\Create Staging Tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Migrate data to Dim Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{E4CFC4B7-09D8-413F-9F58-AC0A20552B4A}"
+      DTS:From="Package\Migrate data to Dim Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Update Type1 Records" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{48D34785-FCC8-4752-BA6C-A0C71B7FC651}"
+      DTS:From="Package\Update Type1 Records"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Merge SCD Type 2 records into Dim Emp" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="185.333333333334,42.6666666666667"
+          Id="Package\Create Staging Tables"
+          TopLeft="123.124994495884,49.9473678726404" />
+        <NodeLayout
+          Size="202.666666666667,42.6666666666667"
+          Id="Package\Migrate data to Dim Table"
+          TopLeft="119.874994887039,115.65789352733" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="218.499994691462,92.6140345393071">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.0438589880228"
+              Start="0,0"
+              End="0,15.5438589880228">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.5438589880228" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="189.333333333334,42.6666666666667"
+          Id="Package\Update Type1 Records"
+          TopLeft="129.374994216487,194.315787340135" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="222.624994551763,158.324560193997">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,35.9912271461387"
+              Start="0,0"
+              End="0,28.4912271461387">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.4912271461387" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="276,42.6666666666667"
+          Id="Package\Merge SCD Type 2 records into Dim Emp"
+          TopLeft="88.7499960325659,275.052628558924" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="225.39582845786,236.982454006802">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.0701745521219"
+              Start="0,0"
+              End="0,30.5701745521219">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5701745521219" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Migrate data to Dim Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\OLE DB Source"
+          TopLeft="134.374993992969,15.0526314136725" />
+        <NodeLayout
+          Size="114.666666666667,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\Lookup"
+          TopLeft="146.874993434176,71.1578939555424" />
+        <EdgeLayout
+          Id="Package\Migrate data to Dim Table.Paths[OLE DB Source Output]"
+          TopLeft="211.708327326303,57.7192980803392">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="49.8333327745404,34.7719292085366"
+              Start="0,0"
+              End="42.3333327745404,34.7719292085366">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.7719292085366" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.7719292085366"
+                    Point2="0,34.7719292085366"
+                    Point3="4,34.7719292085366" />
+                  <mssgle:LineSegment
+                    End="42.3333327745404,34.7719292085366" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\Conditional Split"
+          TopLeft="126.874994328246,131.368419610232" />
+        <EdgeLayout
+          Id="Package\Migrate data to Dim Table.Paths[Lookup Match Output]"
+          TopLeft="261.541660100843,98.2690050666535">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-55.9999991059307,33.0994145435788"
+              Start="0,0"
+              End="-55.9999991059307,25.5994145435788">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-51.9999991059307,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-51.9999991059307,0"
+                    Point2="-55.9999991059307,0"
+                    Point3="-55.9999991059307,4" />
+                  <mssgle:LineSegment
+                    End="-55.9999991059307,25.5994145435788" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-104.191385824681,-17.609375,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="144,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\New Records"
+          TopLeft="41.8749981280417,247.684207806792" />
+        <EdgeLayout
+          Id="Package\Migrate data to Dim Table.Paths[New Records]"
+          TopLeft="180.652772106024,174.035086276899">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-66.7777739779819,73.6491215298931"
+              Start="0,0"
+              End="-66.7777739779819,66.1491215298931">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.904509077574" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.904509077574"
+                    Point2="0,29.904509077574"
+                    Point3="-4,29.904509077574" />
+                  <mssgle:LineSegment
+                    End="-62.7777739779819,29.904509077574" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-62.7777739779819,29.904509077574"
+                    Point2="-66.7777739779819,29.904509077574"
+                    Point3="-66.7777739779819,33.904509077574" />
+                  <mssgle:LineSegment
+                    End="-66.7777739779819,66.1491215298931" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-62.7164651139909,34.904509077574,58.65515625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\Update Records"
+          TopLeft="202.499990947545,247.07017298201" />
+        <EdgeLayout
+          Id="Package\Migrate data to Dim Table.Paths[SCD Type 1]"
+          TopLeft="230.430549883801,174.035086276899">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50.0694410637436,73.0350867051112"
+              Start="0,0"
+              End="50.0694410637436,65.5350867051112">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.6551862124781" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.6551862124781"
+                    Point2="0,29.6551862124781"
+                    Point3="4,29.6551862124781" />
+                  <mssgle:LineSegment
+                    End="46.0694410637436,29.6551862124781" />
+                  <mssgle:CubicBezierSegment
+                    Point1="46.0694410637436,29.6551862124781"
+                    Point2="50.0694410637436,29.6551862124781"
+                    Point3="50.0694410637436,33.6551862124781" />
+                  <mssgle:LineSegment
+                    End="50.0694410637436,65.5350867051112" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-1.21650993687819,34.6551862124781,52.5024609375,11.4140625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="149.333333333334,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\Insert Records"
+          TopLeft="374.374983264134,247.754383500813" />
+        <EdgeLayout
+          Id="Package\Migrate data to Dim Table.Paths[SCD Type 2]"
+          TopLeft="242.874994328246,174.035086276899">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="206.166655602555,73.7192972239145"
+              Start="0,0"
+              End="206.166655602555,66.2192972239145">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.3922023771261" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.3922023771261"
+                    Point2="0,25.3922023771261"
+                    Point3="4,25.3922023771261" />
+                  <mssgle:LineSegment
+                    End="202.166655602555,25.3922023771261" />
+                  <mssgle:CubicBezierSegment
+                    Point1="202.166655602555,25.3922023771261"
+                    Point2="206.166655602555,25.3922023771261"
+                    Point3="206.166655602555,29.3922023771261" />
+                  <mssgle:LineSegment
+                    End="206.166655602555,66.2192972239145" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="76.6465504575274,30.3922023771261,52.8735546875,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Migrate data to Dim Table\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Migrate data to Dim Table\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Migrate data to Dim Table\New Records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Migrate data to Dim Table\Update Records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Migrate data to Dim Table\Insert Records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Merge SCD Type 2 records into Dim Emp">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source"
+          TopLeft="229.999993145466,66.9999980032445" />
+        <NodeLayout
+          Size="174.666666666667,42.6666666666667"
+          Id="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination"
+          TopLeft="231.999993085861,141.99999576807" />
+        <EdgeLayout
+          Id="Package\Merge SCD Type 2 records into Dim Emp.Paths[OLE DB Source Output]"
+          TopLeft="307.333326478799,109.666664669911">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.9999999403954,32.3333310981592"
+              Start="0,0"
+              End="11.9999999403954,24.8333310981592">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.1666655490796" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.1666655490796"
+                    Point2="0,16.1666655490796"
+                    Point3="4,16.1666655490796" />
+                  <mssgle:LineSegment
+                    End="7.99999994039541,16.1666655490796" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.99999994039541,16.1666655490796"
+                    Point2="11.9999999403954,16.1666655490796"
+                    Point3="11.9999999403954,20.1666655490796" />
+                  <mssgle:LineSegment
+                    End="11.9999999403954,24.8333310981592" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

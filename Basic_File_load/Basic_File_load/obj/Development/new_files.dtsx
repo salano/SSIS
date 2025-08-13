@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="new_files"
   DTS:PackageType="5"
-  DTS:VersionBuild="32"
-  DTS:VersionGUID="{AFA9BFE8-8516-4F29-A853-746257E20450}">
+  DTS:VersionBuild="33"
+  DTS:VersionGUID="{ECCF9FA6-5F5A-4279-AF8C-F52F07C80A12}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1598,13 +1598,13 @@ select count(1) from Demo.tbl_logs where FileName = '"+ @[User::FilePath] +"'
           TopLeft="28,18.6140336828825" />
         <EdgeLayout
           Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
-          TopLeft="49.8749990221113,102.122804110208">
+          TopLeft="49.8749990221113,107.900581887986">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-4.3749998044222,61.2456155000246"
+              EndConnector="-4.3749998044222,49.690059944469"
               Start="0,0"
-              End="-11.8749998044222,61.2456155000246">
+              End="-11.8749998044222,49.690059944469">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -1615,13 +1615,13 @@ select count(1) from Demo.tbl_logs where FileName = '"+ @[User::FilePath] +"'
                     Point2="-26.8749998044222,0"
                     Point3="-26.8749998044222,4" />
                   <mssgle:LineSegment
-                    End="-26.8749998044222,57.2456155000246" />
+                    End="-26.8749998044222,45.690059944469" />
                   <mssgle:CubicBezierSegment
-                    Point1="-26.8749998044222,57.2456155000246"
-                    Point2="-26.8749998044222,61.2456155000246"
-                    Point3="-22.8749998044222,61.2456155000246" />
+                    Point1="-26.8749998044222,45.690059944469"
+                    Point2="-26.8749998044222,49.690059944469"
+                    Point3="-22.8749998044222,49.690059944469" />
                   <mssgle:LineSegment
-                    End="-11.8749998044222,61.2456155000246" />
+                    End="-11.8749998044222,49.690059944469" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
