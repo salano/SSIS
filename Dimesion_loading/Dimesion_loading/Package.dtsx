@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="14"
-  DTS:VersionGUID="{C77D03A4-2499-47B9-B9BB-B2AA369BD94B}">
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{694FC9DB-F4AF-47C3-B813-0E1D1CBE6F5F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1050,7 +1050,7 @@
       ,[Email]
       ,[ValidFrom]
   FROM [Dimension].[Employee]
-  where ValidTo = '9999-12-31 00:00:00.0000000'</property>
+  where ValidTo = '9999-12-31 00:00:00.0000000' OR ValidTo IS NULL</property>
                 <property
                   dataType="System.String"
                   description="Specifies a SQL statement that uses parameters to generate the lookup table."
@@ -1068,7 +1068,7 @@
       ,[Email]
       ,[ValidFrom]
   FROM [Dimension].[Employee]
-  where ValidTo = '9999-12-31 00:00:00.0000000') [refTable]
+  where ValidTo = '9999-12-31 00:00:00.0000000' OR ValidTo IS NULL) [refTable]
 where [refTable].[EmployeeID] = ?</property>
                 <property
                   dataType="System.Int32"
@@ -2203,23 +2203,31 @@ where [refTable].[EmployeeID] = ?</property>
           Id="Package\Create Staging Tables"
           TopLeft="123.124994495884,49.9473678726404" />
         <NodeLayout
+          Size="276,42.6666666666667"
+          Id="Package\Merge SCD Type 2 records into Dim Emp"
+          TopLeft="88.7499960325659,275.052628558924" />
+        <NodeLayout
           Size="202.666666666667,42.6666666666667"
           Id="Package\Migrate data to Dim Table"
           TopLeft="119.874994887039,115.65789352733" />
+        <NodeLayout
+          Size="189.333333333334,42.6666666666667"
+          Id="Package\Update Type1 Records"
+          TopLeft="129.374994216487,194.315787340135" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="218.499994691462,92.6140345393071">
+          TopLeft="218.499994691461,92.6140345393071">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,23.0438589880228"
+              EndConnector="0,23.043858988023"
               Start="0,0"
-              End="0,15.5438589880228">
+              End="0,15.543858988023">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,15.5438589880228" />
+                    End="0,15.543858988023" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2228,24 +2236,20 @@ where [refTable].[EmployeeID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="189.333333333334,42.6666666666667"
-          Id="Package\Update Type1 Records"
-          TopLeft="129.374994216487,194.315787340135" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="222.624994551763,158.324560193997">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,35.9912271461387"
+              EndConnector="0,35.9912271461383"
               Start="0,0"
-              End="0,28.4912271461387">
+              End="0,28.4912271461383">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,28.4912271461387" />
+                    End="0,28.4912271461383" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2254,10 +2258,6 @@ where [refTable].[EmployeeID] = ?</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="276,42.6666666666667"
-          Id="Package\Merge SCD Type 2 records into Dim Emp"
-          TopLeft="88.7499960325659,275.052628558924" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
           TopLeft="225.39582845786,236.982454006802">
@@ -2283,274 +2283,6 @@ where [refTable].[EmployeeID] = ?</property>
       </GraphLayout>
     </LayoutInfo>
   </Package>
-  <TaskHost
-    design-time-name="Package\Migrate data to Dim Table">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="154.666666666667,42.6666666666667"
-          Id="Package\Migrate data to Dim Table\OLE DB Source"
-          TopLeft="134.374993992969,15.0526314136725" />
-        <NodeLayout
-          Size="114.666666666667,42.6666666666667"
-          Id="Package\Migrate data to Dim Table\Lookup"
-          TopLeft="146.874993434176,71.1578939555424" />
-        <EdgeLayout
-          Id="Package\Migrate data to Dim Table.Paths[OLE DB Source Output]"
-          TopLeft="211.708327326303,57.7192980803392">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="49.8333327745404,34.7719292085366"
-              Start="0,0"
-              End="42.3333327745404,34.7719292085366">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,30.7719292085366" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,30.7719292085366"
-                    Point2="0,34.7719292085366"
-                    Point3="4,34.7719292085366" />
-                  <mssgle:LineSegment
-                    End="42.3333327745404,34.7719292085366" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="157.333333333334,42.6666666666667"
-          Id="Package\Migrate data to Dim Table\Conditional Split"
-          TopLeft="126.874994328246,131.368419610232" />
-        <EdgeLayout
-          Id="Package\Migrate data to Dim Table.Paths[Lookup Match Output]"
-          TopLeft="261.541660100843,98.2690050666535">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-55.9999991059307,33.0994145435788"
-              Start="0,0"
-              End="-55.9999991059307,25.5994145435788">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-51.9999991059307,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-51.9999991059307,0"
-                    Point2="-55.9999991059307,0"
-                    Point3="-55.9999991059307,4" />
-                  <mssgle:LineSegment
-                    End="-55.9999991059307,25.5994145435788" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-104.191385824681,-17.609375,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="144,42.6666666666667"
-          Id="Package\Migrate data to Dim Table\New Records"
-          TopLeft="41.8749981280417,247.684207806792" />
-        <EdgeLayout
-          Id="Package\Migrate data to Dim Table.Paths[New Records]"
-          TopLeft="180.652772106024,174.035086276899">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-66.7777739779819,73.6491215298931"
-              Start="0,0"
-              End="-66.7777739779819,66.1491215298931">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.904509077574" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,25.904509077574"
-                    Point2="0,29.904509077574"
-                    Point3="-4,29.904509077574" />
-                  <mssgle:LineSegment
-                    End="-62.7777739779819,29.904509077574" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-62.7777739779819,29.904509077574"
-                    Point2="-66.7777739779819,29.904509077574"
-                    Point3="-66.7777739779819,33.904509077574" />
-                  <mssgle:LineSegment
-                    End="-66.7777739779819,66.1491215298931" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-62.7164651139909,34.904509077574,58.65515625,9.7490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="156,42.6666666666667"
-          Id="Package\Migrate data to Dim Table\Update Records"
-          TopLeft="202.499990947545,247.07017298201" />
-        <EdgeLayout
-          Id="Package\Migrate data to Dim Table.Paths[SCD Type 1]"
-          TopLeft="230.430549883801,174.035086276899">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="50.0694410637436,73.0350867051112"
-              Start="0,0"
-              End="50.0694410637436,65.5350867051112">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,25.6551862124781" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,25.6551862124781"
-                    Point2="0,29.6551862124781"
-                    Point3="4,29.6551862124781" />
-                  <mssgle:LineSegment
-                    End="46.0694410637436,29.6551862124781" />
-                  <mssgle:CubicBezierSegment
-                    Point1="46.0694410637436,29.6551862124781"
-                    Point2="50.0694410637436,29.6551862124781"
-                    Point3="50.0694410637436,33.6551862124781" />
-                  <mssgle:LineSegment
-                    End="50.0694410637436,65.5350867051112" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-1.21650993687819,34.6551862124781,52.5024609375,11.4140625"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="149.333333333334,42.6666666666667"
-          Id="Package\Migrate data to Dim Table\Insert Records"
-          TopLeft="374.374983264134,247.754383500813" />
-        <EdgeLayout
-          Id="Package\Migrate data to Dim Table.Paths[SCD Type 2]"
-          TopLeft="242.874994328246,174.035086276899">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="206.166655602555,73.7192972239145"
-              Start="0,0"
-              End="206.166655602555,66.2192972239145">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21.3922023771261" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,21.3922023771261"
-                    Point2="0,25.3922023771261"
-                    Point3="4,25.3922023771261" />
-                  <mssgle:LineSegment
-                    End="202.166655602555,25.3922023771261" />
-                  <mssgle:CubicBezierSegment
-                    Point1="202.166655602555,25.3922023771261"
-                    Point2="206.166655602555,25.3922023771261"
-                    Point3="206.166655602555,29.3922023771261" />
-                  <mssgle:LineSegment
-                    End="206.166655602555,66.2192972239145" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="76.6465504575274,30.3922023771261,52.8735546875,11.43359375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Migrate data to Dim Table\Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string"></Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Migrate data to Dim Table\OLE DB Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Migrate data to Dim Table\New Records">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Migrate data to Dim Table\Update Records">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Migrate data to Dim Table\Insert Records">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Merge SCD Type 2 records into Dim Emp">
     <LayoutInfo>
@@ -2602,6 +2334,19 @@ where [refTable].[EmployeeID] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
+    design-time-name="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
     design-time-name="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Source">
     <Properties>
       <Property>
@@ -2609,8 +2354,263 @@ where [refTable].[EmployeeID] = ?</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Migrate data to Dim Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="114.666666666667,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\Lookup"
+          TopLeft="146.874993434176,71.1578939555424" />
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\OLE DB Source"
+          TopLeft="134.374993992969,15.0526314136725" />
+        <NodeLayout
+          Size="149.333333333334,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\Insert Records"
+          TopLeft="374.374983264134,247.754383500813" />
+        <NodeLayout
+          Size="156,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\Update Records"
+          TopLeft="202.499990947545,247.07017298201" />
+        <NodeLayout
+          Size="144,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\New Records"
+          TopLeft="41.8749981280417,247.684207806792" />
+        <NodeLayout
+          Size="157.333333333334,42.6666666666667"
+          Id="Package\Migrate data to Dim Table\Conditional Split"
+          TopLeft="126.874994328246,131.368419610232" />
+        <EdgeLayout
+          Id="Package\Migrate data to Dim Table.Paths[Lookup Match Output]"
+          TopLeft="261.541660100843,98.2690050666535">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-55.9999991059307,33.0994145435788"
+              Start="0,0"
+              End="-55.9999991059307,25.5994145435788">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-51.9999991059307,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-51.9999991059307,0"
+                    Point2="-55.9999991059307,0"
+                    Point3="-55.9999991059307,4" />
+                  <mssgle:LineSegment
+                    End="-55.9999991059307,25.5994145435788" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-104.191385824681,-17.609375,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Migrate data to Dim Table.Paths[SCD Type 2]"
+          TopLeft="242.874994328246,174.035086276899">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="206.166655602555,73.7192972239145"
+              Start="0,0"
+              End="206.166655602555,66.2192972239145">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.3922023771261" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.3922023771261"
+                    Point2="0,25.3922023771261"
+                    Point3="4,25.3922023771261" />
+                  <mssgle:LineSegment
+                    End="202.166655602555,25.3922023771261" />
+                  <mssgle:CubicBezierSegment
+                    Point1="202.166655602555,25.3922023771261"
+                    Point2="206.166655602555,25.3922023771261"
+                    Point3="206.166655602555,29.3922023771261" />
+                  <mssgle:LineSegment
+                    End="206.166655602555,66.2192972239145" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="76.6465504575274,30.3922023771261,52.8735546875,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Migrate data to Dim Table.Paths[SCD Type 1]"
+          TopLeft="230.430549883801,174.035086276899">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50.0694410637436,73.0350867051112"
+              Start="0,0"
+              End="50.0694410637436,65.5350867051112">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.6551862124781" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.6551862124781"
+                    Point2="0,29.6551862124781"
+                    Point3="4,29.6551862124781" />
+                  <mssgle:LineSegment
+                    End="46.0694410637436,29.6551862124781" />
+                  <mssgle:CubicBezierSegment
+                    Point1="46.0694410637436,29.6551862124781"
+                    Point2="50.0694410637436,29.6551862124781"
+                    Point3="50.0694410637436,33.6551862124781" />
+                  <mssgle:LineSegment
+                    End="50.0694410637436,65.5350867051112" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-1.21650993687819,34.6551862124781,52.5024609375,11.4140625"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Migrate data to Dim Table.Paths[OLE DB Source Output]"
+          TopLeft="211.708327326303,57.7192980803392">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="49.8333327745404,34.7719292085366"
+              Start="0,0"
+              End="42.3333327745404,34.7719292085366">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.7719292085366" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.7719292085366"
+                    Point2="0,34.7719292085366"
+                    Point3="4,34.7719292085366" />
+                  <mssgle:LineSegment
+                    End="42.3333327745404,34.7719292085366" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Migrate data to Dim Table.Paths[New Records]"
+          TopLeft="180.652772106024,174.035086276899">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-66.7777739779819,73.6491215298931"
+              Start="0,0"
+              End="-66.7777739779819,66.1491215298931">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.904509077574" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.904509077574"
+                    Point2="0,29.904509077574"
+                    Point3="-4,29.904509077574" />
+                  <mssgle:LineSegment
+                    End="-62.7777739779819,29.904509077574" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-62.7777739779819,29.904509077574"
+                    Point2="-66.7777739779819,29.904509077574"
+                    Point3="-66.7777739779819,33.904509077574" />
+                  <mssgle:LineSegment
+                    End="-66.7777739779819,66.1491215298931" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-62.7164651139909,34.904509077574,58.65515625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Merge SCD Type 2 records into Dim Emp\OLE DB Destination">
+    design-time-name="Package\Migrate data to Dim Table\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Migrate data to Dim Table\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Migrate data to Dim Table\Insert Records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Migrate data to Dim Table\Update Records">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Migrate data to Dim Table\New Records">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
