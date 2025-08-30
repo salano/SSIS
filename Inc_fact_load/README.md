@@ -103,3 +103,38 @@ Fact table update (records not fount in data warehouse table) -- stage destinati
 Event handler configuration
 ![Alt text](event_handler_cf.png)
 ![Alt text](conf_log_error.png)
+
+Source data:
+orders table
+![Alt text](orders_table.png)
+Dimension Tables:
+Customers
+![Alt text](dim_customers.png)
+Dates
+![Alt text](dim_date.png)
+Products
+![Alt text](dim_products.png)
+Exectue the SSIS job the first time. We can see the data flow to the 'No match' path in the fact table look up.
+![Alt text](dim_products.png)
+Fact Tables
+Fact orders table output after initial job run
+![Alt text](frun1.png)
+![Alt text](frun2.png)
+![Alt text](frun3.png)
+![Alt text](frun4.png)
+
+![Alt text](fact_orders.png)
+We update order 1 unitprice in the source table and re-executed the SSIS job
+
+```
+update [FameSell].[dbo].[Orders]
+set UnitPrice = 300
+where OrderID=1
+```
+
+![Alt text](urun1.png)
+![Alt text](urun2.png)
+We can see the data flowed into the 'matched' path of the fact table lookup in the SSIS job.
+
+After the SSIS job execution, we can see the destination warehouse fact order table being updated with the changes for order one.
+![Alt text](fact_orders2.png)

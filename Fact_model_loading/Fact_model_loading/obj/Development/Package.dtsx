@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="33"
-  DTS:VersionGUID="{C31A8CB1-D531-47A8-9A3D-FA570596E1FC}">
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{E86D59FB-99F3-4B72-8A93-F17CA1C5D7D8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -110,19 +110,19 @@
                       refId="Package\Migrate to Fact Table\Conditional Split.Inputs[Conditional Split Input].Columns[Dest_Quantity]"
                       cachedDataType="i4"
                       cachedName="Dest_Quantity"
-                      lineageId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_Quantity]" />
+                      lineageId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_Quantity]" />
                     <inputColumn
                       refId="Package\Migrate to Fact Table\Conditional Split.Inputs[Conditional Split Input].Columns[Dest_UnitPrice]"
                       cachedDataType="numeric"
                       cachedName="Dest_UnitPrice"
                       cachedPrecision="18"
-                      lineageId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_UnitPrice]" />
+                      lineageId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_UnitPrice]" />
                     <inputColumn
                       refId="Package\Migrate to Fact Table\Conditional Split.Inputs[Conditional Split Input].Columns[Dest_TaxRate]"
                       cachedDataType="numeric"
                       cachedName="Dest_TaxRate"
                       cachedPrecision="18"
-                      lineageId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_TaxRate]" />
+                      lineageId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_TaxRate]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -142,7 +142,7 @@
                       containsID="true"
                       dataType="System.String"
                       description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
-                      name="Expression">#{Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1].Columns[Quantity]} != #{Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_Quantity]} || #{Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1].Columns[UnitPrice]} != #{Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_UnitPrice]} || #{Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1].Columns[TaxRate]} != #{Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_TaxRate]}</property>
+                      name="Expression">#{Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1].Columns[Quantity]} != #{Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_Quantity]} || #{Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1].Columns[UnitPrice]} != #{Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_UnitPrice]} || #{Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1].Columns[TaxRate]} != #{Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_TaxRate]}</property>
                     <property
                       containsID="true"
                       dataType="System.String"
@@ -801,6 +801,207 @@ where [refTable].[Date] = ?</property>
               </outputs>
             </component>
             <component
+              refId="Package\Migrate to Fact Table\Fact Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Fact Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT *, BINARY_CHECKSUM(Quantity, UnitPrice, TaxRate) AS Dest_BSM FROM [FameSellDW].[Fact].[Orders]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT *, BINARY_CHECKSUM(Quantity, UnitPrice, TaxRate) AS Dest_BSM FROM [FameSellDW].[Fact].[Orders]) [refTable]
+where [refTable].[OrderId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EmployeeSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DateSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="OrderId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Quantity" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UnitPrice" dataType="DT_NUMERIC" length="0" precision="18" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TaxRate" dataType="DT_NUMERIC" length="0" precision="18" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastEditedWhen" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0"/&gt;&lt;referenceColumn name="Dest_BSM" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1].Columns[OrderID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Migrate to Fact Table\Fact Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Migrate to Fact Table\Fact Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Migrate to Fact Table\Fact Lookup.Inputs[Lookup Input].Columns[OrderID]"
+                      cachedDataType="i4"
+                      cachedName="OrderID"
+                      lineageId="Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1].Columns[OrderID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">OrderId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Migrate to Fact Table\Fact Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_BSM]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_BSM]"
+                      name="Dest_BSM"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Dest_BSM</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_Quantity]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_Quantity]"
+                      name="Dest_Quantity"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Quantity</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_UnitPrice]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_UnitPrice]"
+                      name="Dest_UnitPrice"
+                      precision="18"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">UnitPrice</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_TaxRate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output].Columns[Dest_TaxRate]"
+                      name="Dest_TaxRate"
+                      precision="18"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TaxRate</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Migrate to Fact Table\Fact Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Migrate to Fact Table\Fact Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\Migrate to Fact Table\Fact Orders Ole Dest"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
@@ -994,207 +1195,6 @@ where [refTable].[Date] = ?</property>
                       refId="Package\Migrate to Fact Table\Fact Orders Ole Dest.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                       dataType="i4"
                       lineageId="Package\Migrate to Fact Table\Fact Orders Ole Dest.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
-                      name="ErrorColumn"
-                      specialFlags="2" />
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-              </outputs>
-            </component>
-            <component
-              refId="Package\Migrate to Fact Table\Lookup"
-              componentClassID="Microsoft.Lookup"
-              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
-              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
-              name="Lookup"
-              usesDispositions="true"
-              version="6">
-              <properties>
-                <property
-                  dataType="System.String"
-                  description="Specifies the SQL statement that generates the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT *, BINARY_CHECKSUM(Quantity, UnitPrice, TaxRate) AS Dest_BSM FROM [FameSellDW].[Fact].[Orders]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
-                  expressionType="Notify"
-                  name="SqlCommandParam"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT *, BINARY_CHECKSUM(Quantity, UnitPrice, TaxRate) AS Dest_BSM FROM [FameSellDW].[Fact].[Orders]) [refTable]
-where [refTable].[OrderId] = ?</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the type of connection used to access the reference dataset."
-                  name="ConnectionType"
-                  typeConverter="LookupConnectionType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the cache type of the lookup table."
-                  name="CacheType"
-                  typeConverter="CacheType">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
-                  name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">1</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
-                  name="NoMatchCachePercentage">0</property>
-                <property
-                  dataType="System.Int32"
-                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
-                  name="MaxMemoryUsage">25</property>
-                <property
-                  dataType="System.Int64"
-                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
-                  name="MaxMemoryUsage64">25</property>
-                <property
-                  dataType="System.String"
-                  description="Indicates whether to reference metadata in an XML format."
-                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="EmployeeSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="DateSK" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="OrderId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Quantity" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="UnitPrice" dataType="DT_NUMERIC" length="0" precision="18" scale="0" codePage="0"/&gt;&lt;referenceColumn name="TaxRate" dataType="DT_NUMERIC" length="0" precision="18" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LastEditedWhen" dataType="DT_DBTIMESTAMP2" length="0" precision="0" scale="7" codePage="0"/&gt;&lt;referenceColumn name="Dest_BSM" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
-                <property
-                  containsID="true"
-                  dataType="System.String"
-                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1].Columns[OrderID]};</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the column code page to use when code page information is unavailable from the data source."
-                  name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
-                  name="TreatDuplicateKeysAsError">false</property>
-              </properties>
-              <connections>
-                <connection
-                  refId="Package\Migrate to Fact Table\Lookup.Connections[OleDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
-                  connectionManagerRefId="Package.ConnectionManagers[MSI\SALANODEMO.FameSellDW]"
-                  description="Connection manager used to access lookup data."
-                  name="OleDbConnection" />
-              </connections>
-              <inputs>
-                <input
-                  refId="Package\Migrate to Fact Table\Lookup.Inputs[Lookup Input]"
-                  name="Lookup Input">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Migrate to Fact Table\Lookup.Inputs[Lookup Input].Columns[OrderID]"
-                      cachedDataType="i4"
-                      cachedName="OrderID"
-                      lineageId="Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1].Columns[OrderID]">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table that a column joins."
-                          name="JoinToReferenceColumn">OrderId</property>
-                        <property
-                          dataType="System.Null"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn" />
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-              </inputs>
-              <outputs>
-                <output
-                  refId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output]"
-                  errorOrTruncationOperation="Lookup"
-                  exclusionGroup="1"
-                  name="Lookup Match Output"
-                  synchronousInputId="Package\Migrate to Fact Table\Lookup.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_BSM]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_BSM]"
-                      name="Dest_BSM"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">Dest_BSM</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_Quantity]"
-                      dataType="i4"
-                      errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_Quantity]"
-                      name="Dest_Quantity"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">Quantity</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_UnitPrice]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_UnitPrice]"
-                      name="Dest_UnitPrice"
-                      precision="18"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">UnitPrice</property>
-                      </properties>
-                    </outputColumn>
-                    <outputColumn
-                      refId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_TaxRate]"
-                      dataType="numeric"
-                      errorOrTruncationOperation="Copy Column"
-                      lineageId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output].Columns[Dest_TaxRate]"
-                      name="Dest_TaxRate"
-                      precision="18"
-                      truncationRowDisposition="FailComponent">
-                      <properties>
-                        <property
-                          dataType="System.String"
-                          description="Specifies the column in the reference table from which a column is copied."
-                          name="CopyFromReferenceColumn">TaxRate</property>
-                      </properties>
-                    </outputColumn>
-                  </outputColumns>
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup No Match Output]"
-                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
-                  exclusionGroup="1"
-                  name="Lookup No Match Output"
-                  synchronousInputId="Package\Migrate to Fact Table\Lookup.Inputs[Lookup Input]">
-                  <externalMetadataColumns />
-                </output>
-                <output
-                  refId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Error Output]"
-                  exclusionGroup="1"
-                  isErrorOut="true"
-                  name="Lookup Error Output"
-                  synchronousInputId="Package\Migrate to Fact Table\Lookup.Inputs[Lookup Input]">
-                  <outputColumns>
-                    <outputColumn
-                      refId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      dataType="i4"
-                      lineageId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
-                      name="ErrorCode"
-                      specialFlags="1" />
-                    <outputColumn
-                      refId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
-                      dataType="i4"
-                      lineageId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -3341,7 +3341,7 @@ where [refTable].[ProductID] = ?</property>
               refId="Package\Migrate to Fact Table.Paths[Lookup Match Output3]"
               endId="Package\Migrate to Fact Table\Conditional Split.Inputs[Conditional Split Input]"
               name="Lookup Match Output"
-              startId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup Match Output]" />
+              startId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup Match Output]" />
             <path
               refId="Package\Migrate to Fact Table.Paths[Lookup No Match Output3]"
               endId="Package\Migrate to Fact Table\Derived Column.Inputs[Derived Column Input]"
@@ -3351,7 +3351,7 @@ where [refTable].[ProductID] = ?</property>
               refId="Package\Migrate to Fact Table.Paths[Lookup No Match Output2]"
               endId="Package\Migrate to Fact Table\Fact Orders Ole Dest.Inputs[OLE DB Destination Input]"
               name="Lookup No Match Output"
-              startId="Package\Migrate to Fact Table\Lookup.Outputs[Lookup No Match Output]" />
+              startId="Package\Migrate to Fact Table\Fact Lookup.Outputs[Lookup No Match Output]" />
             <path
               refId="Package\Migrate to Fact Table.Paths[Lookup No Match Output]"
               endId="Package\Migrate to Fact Table\Derived Column 2.Inputs[Derived Column Input]"
@@ -3369,7 +3369,7 @@ where [refTable].[ProductID] = ?</property>
               startId="Package\Migrate to Fact Table\OLE DB Source.Outputs[OLE DB Source Output]" />
             <path
               refId="Package\Migrate to Fact Table.Paths[Union All Output 12]"
-              endId="Package\Migrate to Fact Table\Lookup.Inputs[Lookup Input]"
+              endId="Package\Migrate to Fact Table\Fact Lookup.Inputs[Lookup Input]"
               name="Union All Output 1"
               startId="Package\Migrate to Fact Table\Union All 2.Outputs[Union All Output 1]" />
             <path
@@ -3836,8 +3836,8 @@ where [refTable].[ProductID] = ?</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <NodeLayout
-          Size="114.666666666667,42.6666666666667"
-          Id="Package\Migrate to Fact Table\Lookup"
+          Size="138,42.6666666666667"
+          Id="Package\Migrate to Fact Table\Fact Lookup"
           TopLeft="237.499989382923,633.49122429139" />
         <NodeLayout
           Size="180,42.6666666666667"
@@ -3845,37 +3845,37 @@ where [refTable].[ProductID] = ?</property>
           TopLeft="44.374998016283,719.38596117857" />
         <EdgeLayout
           Id="Package\Migrate to Fact Table.Paths[Lookup No Match Output2]"
-          TopLeft="294.833322716256,676.157890958057">
+          TopLeft="284.833322716256,676.157890958057">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-160.458324699973,43.2280702205135"
+              EndConnector="-150.458324699973,43.2280702205135"
               Start="0,0"
-              End="-160.458324699973,35.7280702205135">
+              End="-150.458324699973,35.7280702205135">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,17.6140351102567" />
+                    End="0,13.5884984851373" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,17.6140351102567"
-                    Point2="0,21.6140351102567"
-                    Point3="-4,21.6140351102567" />
+                    Point1="0,13.5884984851373"
+                    Point2="0,17.5884984851373"
+                    Point3="-4,17.5884984851373" />
                   <mssgle:LineSegment
-                    End="-156.458324699973,21.6140351102567" />
+                    End="-146.458324699973,17.5884984851373" />
                   <mssgle:CubicBezierSegment
-                    Point1="-156.458324699973,21.6140351102567"
-                    Point2="-160.458324699973,21.6140351102567"
-                    Point3="-160.458324699973,25.6140351102567" />
+                    Point1="-146.458324699973,17.5884984851373"
+                    Point2="-150.458324699973,17.5884984851373"
+                    Point3="-150.458324699973,21.5884984851373" />
                   <mssgle:LineSegment
-                    End="-160.458324699973,35.7280702205135" />
+                    End="-150.458324699973,35.7280702205135" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-136.035549068737,26.6140351102567,111.6127734375,11.609375"
+              BoundingBox="-131.035549068737,22.5884984851373,111.6127734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -3889,37 +3889,37 @@ where [refTable].[ProductID] = ?</property>
           TopLeft="343.124984661118,712.842102618759" />
         <EdgeLayout
           Id="Package\Migrate to Fact Table.Paths[Lookup Match Output3]"
-          TopLeft="312.611100494034,676.157890958057">
+          TopLeft="328.16665604959,676.157890958057">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="109.18055083375,36.6842116607025"
+              EndConnector="93.6249952781948,36.6842116607025"
               Start="0,0"
-              End="109.18055083375,29.1842116607025">
+              End="93.6249952781948,29.1842116607025">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,10.9765818247822" />
+                    End="0,10.9259543146698" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,10.9765818247822"
-                    Point2="0,14.9765818247822"
-                    Point3="4,14.9765818247822" />
+                    Point1="0,10.9259543146698"
+                    Point2="0,14.9259543146698"
+                    Point3="4,14.9259543146698" />
                   <mssgle:LineSegment
-                    End="105.18055083375,14.9765818247822" />
+                    End="89.6249952781948,14.9259543146698" />
                   <mssgle:CubicBezierSegment
-                    Point1="105.18055083375,14.9765818247822"
-                    Point2="109.18055083375,14.9765818247822"
-                    Point3="109.18055083375,18.9765818247822" />
+                    Point1="89.6249952781948,14.9259543146698"
+                    Point2="93.6249952781948,14.9259543146698"
+                    Point3="93.6249952781948,18.9259543146698" />
                   <mssgle:LineSegment
-                    End="109.18055083375,29.1842116607025" />
+                    End="93.6249952781948,29.1842116607025" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="6.39888869812516,19.9765818247822,96.3827734375,11.609375"
+              BoundingBox="-1.37888907965262,19.9259543146698,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -4059,9 +4059,9 @@ where [refTable].[ProductID] = ?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-137.08332757776,47.7192975093895"
+              EndConnector="-125.416660911093,47.7192975093895"
               Start="0,0"
-              End="-137.08332757776,40.2192975093895">
+              End="-125.416660911093,40.2192975093895">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
@@ -4072,13 +4072,13 @@ where [refTable].[ProductID] = ?</property>
                     Point2="0,23.8596487546948"
                     Point3="-4,23.8596487546948" />
                   <mssgle:LineSegment
-                    End="-133.08332757776,23.8596487546948" />
+                    End="-121.416660911093,23.8596487546948" />
                   <mssgle:CubicBezierSegment
-                    Point1="-133.08332757776,23.8596487546948"
-                    Point2="-137.08332757776,23.8596487546948"
-                    Point3="-137.08332757776,27.8596487546948" />
+                    Point1="-121.416660911093,23.8596487546948"
+                    Point2="-125.416660911093,23.8596487546948"
+                    Point3="-125.416660911093,27.8596487546948" />
                   <mssgle:LineSegment
-                    End="-137.08332757776,40.2192975093895" />
+                    End="-125.416660911093,40.2192975093895" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -4204,7 +4204,7 @@ where [refTable].[ProductID] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Migrate to Fact Table\Lookup">
+    design-time-name="Package\Migrate to Fact Table\Fact Lookup">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
