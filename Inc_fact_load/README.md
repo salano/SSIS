@@ -137,4 +137,4 @@ where OrderID=1
 We can see the data flowed into the 'matched' path of the fact table lookup in the SSIS job.
 
 After the SSIS job execution, we can see the destination warehouse fact order table being updated with the changes for order one.
-![Alt text](fact_orders2.png)
+![Alt text](fact_order2.png)
