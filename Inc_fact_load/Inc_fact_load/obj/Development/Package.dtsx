@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="22"
-  DTS:VersionGUID="{4DB1D93C-7995-483E-9EB3-721CACBC34F8}">
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{700D4A85-AB2A-4B50-B2DE-1047CEF01971}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -3917,7 +3917,7 @@ where [refTable].[ProductID] = ?</property>
         <NodeLayout
           Size="164,42.6666666666667"
           Id="Package\New - Data\Staging fact order"
-          TopLeft="398.749982174487,920.192977234955" />
+          TopLeft="398.124982202427,870.245609362315" />
         <NodeLayout
           Size="165.333333333334,42.6666666666667"
           Id="Package\New - Data\Derived Column 1"
@@ -4476,33 +4476,33 @@ where [refTable].[ProductID] = ?</property>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-23.5416654652606,98.9999981444134"
+              EndConnector="-24.1666654373209,49.0526302717731"
               Start="0,0"
-              End="-23.5416654652606,91.4999981444134">
+              End="-24.1666654373209,41.5526302717731">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,45.4999990722067" />
+                    End="0,20.5263151358865" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,45.4999990722067"
-                    Point2="0,49.4999990722067"
-                    Point3="-4,49.4999990722067" />
+                    Point1="0,20.5263151358865"
+                    Point2="0,24.5263151358865"
+                    Point3="-4,24.5263151358865" />
                   <mssgle:LineSegment
-                    End="-19.5416654652606,49.4999990722067" />
+                    End="-20.1666654373209,24.5263151358865" />
                   <mssgle:CubicBezierSegment
-                    Point1="-19.5416654652606,49.4999990722067"
-                    Point2="-23.5416654652606,49.4999990722067"
-                    Point3="-23.5416654652606,53.4999990722067" />
+                    Point1="-20.1666654373209,24.5263151358865"
+                    Point2="-24.1666654373209,24.5263151358865"
+                    Point3="-24.1666654373209,28.5263151358865" />
                   <mssgle:LineSegment
-                    End="-23.5416654652606,91.4999981444134" />
+                    End="-24.1666654373209,41.5526302717731" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-41.6417116388803,54.4999990722067,59.7417578125,11.609375"
+              BoundingBox="-41.9542116249104,29.5263151358865,59.7417578125,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
